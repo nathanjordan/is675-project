@@ -1,0 +1,11 @@
+{
+    "_id": "nf032hfn092nf09dsf",
+    "first_name": "Nathan",
+    "last_name": "Jordan",
+    "email": "natedagreat27274@gmail.com",
+    "permissions": [
+        "PermissionID",
+        "PermissionID",
+        "membranePermissionID"
+    ]
+}

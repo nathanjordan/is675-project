@@ -1,0 +1,32 @@
+{
+    "_id": "23p45fg2wlr87fps",
+    "label": "brain1",
+    "ip_address": "10.22.137.44",
+    "status": "online",
+    "resources": [
+        {
+            "type": "CPU",
+            "properties": {
+                "make": "AMD",
+                "series": "Phenom 2",
+                "cores": 6
+            }
+        },
+        {
+            "type": "CUDA",
+            "properties": {
+                "name": "GTX580"
+                "compute_capability": 2.5,
+                "cores": 512
+            }
+        },
+        {
+            "type": "CUDA",
+            "properties": {
+                "name": "GTX580"
+                "compute_capability": 2.5,
+                "cores": 512
+            }
+        }
+    ]
+}
