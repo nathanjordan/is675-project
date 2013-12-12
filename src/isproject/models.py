@@ -97,6 +97,7 @@ class User(Document):
     __collection__ = "users"
 
     structure = {
+        "username": unicode,
         "first_name": unicode,
         "last_name": unicode,
         "email": unicode,

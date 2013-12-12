@@ -4,6 +4,8 @@ from flask import Flask, request, make_response, render_template, send_from_dire
 from flask.ext.restful import Api, Resource
 from mongokit import Connection
 from models import Node, Permission, Report, Session, Sim, User
+import json
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 api = Api(app)
@@ -18,6 +20,19 @@ conn.register([
     Sim,
     User
 ])
+
+pages = [
+    ("Home", "/"),
+    ("Users", "/pages/users"),
+    ("Nodes", "/pages/nodes"),
+    ("Reports", "/pages/reports"),
+    ("Permissions", "/pages/permissions")
+]
+
+
+def resolve_object(_id, collection):
+    print conn[collection].one({"_id": _id})
+    return conn[collection].one({"_id": _id})
 
 
 class MongoResource(Resource):
@@ -76,15 +91,56 @@ class SimResource(MongoResource):
 
 class UserResource(MongoResource):
 
+    def get(self, _id):
+        doc = super(MongoResource, self).get(_id)
+        permission_objects = []
+        for permission in doc.permissions:
+            obj = conn["Permission"].one({"_id": permission})
+            permission_objects.append(obj)
+        doc.permissions = permission_objects
+        return doc
+
     resource_name = "User"
 
 
+class PluralResource(Resource):
+
+    resource_name = None
+
+    def get(self):
+        resources = list(conn[self.resource_name].find())
+        return make_response(json.dumps(resources))
+
+
+class UsersResource(PluralResource):
+
+    resource_name = "User"
+
+    def get(self):
+        resources = list(conn[self.resource_name].find())
+        for user in resources:
+            permissions = []
+            for permission in user['permissions']:
+                permissions.append(resolve_object(permission, "Permission"))
+            user['permissions'] = permissions
+        return make_response(json.dumps(resources))
+
+
+class PermissionsResource(PluralResource):
+
+    resource_name = "Permission"
+
+# Add singular resources
 api.add_resource(NodeResource, '/node/<_id>')
 api.add_resource(PermissionResource, '/permission/<_id>')
 api.add_resource(ReportResource, '/report/<_id>')
 api.add_resource(SessionResource, '/session/<_id>')
 api.add_resource(SimResource, '/sim/<_id>')
 api.add_resource(UserResource, '/user/<_id>')
+
+# Add plural resources
+api.add_resource(UsersResource, '/users')
+api.add_resource(PermissionsResource, '/permissions')
 
 
 # Serves static resources like css, js, images, etc.
@@ -96,8 +152,18 @@ def serveStaticResource(resource):
 
 @app.route('/')
 def index_route():
-    return render_template('index.html')
+    return render_template('index.html', title="Home", pages=pages)
+
+
+@app.route('/pages/users')
+def user_page_route():
+    return render_template('users.html', title="Users", pages=pages)
+
+
+@app.route('/pages/permissions')
+def permission_page_route():
+    return render_template('permissions.html', title="Permissions", pages=pages)
 
 
 if __name__ == '__main__':
-    app.run(host="localhost", port=8000, debug=True)
+    app.run(host="0.0.0.0", port=8000, debug=True)

@@ -1,7 +1,7 @@
-function UserController($scope, $resource) {
+function PermissionController($scope, $resource) {
 
-    var resourceUrl = '/user/'
-    var resourceListUrl = '/users'
+    var resourceUrl = '/permission/'
+    var resourceListUrl = '/permissions'
 
     var Resource = $resource(resourceUrl + ':_id',
                          { _id: '@_id' },
@@ -25,11 +25,7 @@ function UserController($scope, $resource) {
         var resource_id = String(Math.round(Math.random() * Math.pow(2, 64)))
         var resource = new Resource({
             _id: resource_id,
-            username: $scope.user.username,
-            first_name: $scope.user.first_name,
-            last_name: $scope.user.last_name,
-            email: $scope.user.email,
-            permissions: []
+            name: $scope.permission.name
         });
         resource.$save();
         updateResourceList();

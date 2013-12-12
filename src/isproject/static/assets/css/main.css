@@ -1,0 +1,21 @@
+.new-form {
+    float:left;
+    width:30%;
+    margin-left:15px;
+}
+
+.entity-list {
+    float:left;
+    width:60%;
+    margin-left: 50px;
+}
+
+.entity {
+    border-bottom: 1px dotted #aaa;
+    margin-bottom: 20px;
+}
+.nav {
+    padding-bottom:15px;
+    margin-bottom:15px;
+    border-bottom:1px solid #eee;
+}
