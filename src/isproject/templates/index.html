@@ -1,0 +1,20 @@
+        {% include 'header.html' %}
+        <div class="content">
+            <form class="newform">
+                <div class="formRow">
+                    <label for="">Label</label>
+                    <input type="text" ng-model="label"></input>
+                </div>
+                <div class="formRow">
+                    <label for="">IP Address</label>
+                    <input type="text" ng-model="ipaddress"></input>
+                </div>
+                <div class="formRow">
+                    <label for=""></label>
+                    <input type="button"></input>
+                </div>
+            </form>
+            <div ng-repeat="node in nodes">
+            </div>
+        </div>
+        {% include 'footer.html' %}
