@@ -1,0 +1,31 @@
+        {% include 'header.html' %}
+        <div class="content" data-ng-controller="SessionController">
+            <form class="new-form form-horizontal" role="form" data-ng-submit="addResource()">
+                <div class="form-group">
+                    <div class="alert alert-warning">
+                        This is a readonly entity
+                    </div>
+                </div>
+            </form>
+            <div class="entity-list">
+                <div class="entity" data-ng-repeat="sim in ResourceList">
+                    <div class="form-group">
+                        <label for="">Simulation Session</label>
+                        <span>{{ '{{ sim.session }}' }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Simulation Start Time</label>
+                        <span>{{ '{{ sim.start_time }}' }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Simulation End Time</label>
+                        <span>{{ '{{ sim.end_time }}' }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Simulation Reports</label>
+                        <span data-ng-repeat="report in sim.reports">{{ '{{ report }}' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'footer.html' %}

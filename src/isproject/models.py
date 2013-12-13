@@ -64,6 +64,7 @@ class Report(Document):
 
     structure = {
         "name": unicode,
+        "sim_id": unicode,
         "report_type": unicode,
         "report_string": unicode,
         "filename": unicode
@@ -103,5 +104,3 @@ class User(Document):
         "email": unicode,
         "permissions": [ObjectId]
     }
-
-

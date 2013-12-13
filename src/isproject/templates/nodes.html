@@ -1,0 +1,50 @@
+        {% include 'header.html' %}
+        <div class="content" data-ng-controller="NodeController">
+            <form class="new-form form-horizontal" role="form" data-ng-submit="addResource()">
+                <div class="form-group">
+                    <label for="">Label</label>
+                    <input class="form-control" type="text" data-ng-model="node.label"></input>
+                </div>
+                <div class="form-group">
+                    <label for="">IP Address</label>
+                    <input class="form-control" type="text" data-ng-model="node.ip_address"></input>
+                </div>
+                <div class="form-group">
+                    <label for="">Status</label>
+                    <input class="form-control" type="text" data-ng-model="node.status" disabled="disabled"></input>
+                </div>
+                <div class="form-group">
+                    <label for="">Resources</label>
+                    <input class="form-control" type="text"></input>
+                </div>
+                <div class="form-group">
+                    <label for=""></label>
+                    <input class="btn btn-success" type="submit" value="New Node"></input>
+                </div>
+            </form>
+            <div class="entity-list">
+                <div class="entity" data-ng-repeat="user in resourceList">
+                    <div class="form-group">
+                        <label for="">Label</label>
+                        <span>{{ '{{ node.label }}' }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="">IP Address</label>
+                        <span>{{ '{{ node.ip_address }}' }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Status</label>
+                        <span>{{ '{{ node.status }}' }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Resources</label>
+                        <span data-ng-repeat="resource in node.resources">{{ '{{ resource.name }}' }},</span>
+                    </div>
+                    <div class="form-group">
+                        <label for=""></label>
+                        <button class="btn btn-danger" data-ng-click="deleteResource(user._id)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'footer.html' %}

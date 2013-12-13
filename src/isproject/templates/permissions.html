@@ -10,8 +10,8 @@
                     <input class="btn btn-success" type="submit" value="New Permission"></input>
                 </div>
             </form>
-            <div class="entity-list" data-ng-repeat="permission in resourceList">
-                <div class="entity">
+            <div class="entity-list">
+                <div class="entity" data-ng-repeat="permission in resourceList">
                     <div class="form-group">
                         <label for="">Name</label>
                         <span>{{ '{{ permission.name }}' }}</span>

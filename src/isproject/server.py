@@ -26,6 +26,8 @@ pages = [
     ("Users", "/pages/users"),
     ("Nodes", "/pages/nodes"),
     ("Reports", "/pages/reports"),
+    ("Sessions", "/pages/sessions"),
+    ("Sims", "/pages/sims"),
     ("Permissions", "/pages/permissions")
 ]
 
@@ -112,6 +114,11 @@ class PluralResource(Resource):
         return make_response(json.dumps(resources))
 
 
+class NodesResource(PluralResource):
+
+    resource_name = "Node"
+
+
 class UsersResource(PluralResource):
 
     resource_name = "User"
@@ -130,6 +137,22 @@ class PermissionsResource(PluralResource):
 
     resource_name = "Permission"
 
+
+class ReportsResource(PluralResource):
+
+    resource_name = "Report"
+
+
+class SessionsResource(PluralResource):
+
+    resource_name = "Session"
+
+
+class SimsResource(PluralResource):
+
+    resource_name = "Sim"
+
+
 # Add singular resources
 api.add_resource(NodeResource, '/node/<_id>')
 api.add_resource(PermissionResource, '/permission/<_id>')
@@ -139,8 +162,12 @@ api.add_resource(SimResource, '/sim/<_id>')
 api.add_resource(UserResource, '/user/<_id>')
 
 # Add plural resources
+api.add_resource(NodesResource, '/nodes')
 api.add_resource(UsersResource, '/users')
 api.add_resource(PermissionsResource, '/permissions')
+api.add_resource(ReportsResource, '/reports')
+api.add_resource(SessionsResource, '/sessions')
+api.add_resource(SimsResource, '/sims')
 
 
 # Serves static resources like css, js, images, etc.
@@ -155,6 +182,11 @@ def index_route():
     return render_template('index.html', title="Home", pages=pages)
 
 
+@app.route('/pages/nodes')
+def node_page_route():
+    return render_template('nodes.html', title="Nodes", pages=pages)
+
+
 @app.route('/pages/users')
 def user_page_route():
     return render_template('users.html', title="Users", pages=pages)
@@ -163,6 +195,21 @@ def user_page_route():
 @app.route('/pages/permissions')
 def permission_page_route():
     return render_template('permissions.html', title="Permissions", pages=pages)
+
+
+@app.route('/pages/reports')
+def report_page_route():
+    return render_template('reports.html', title="Reports", pages=pages)
+
+
+@app.route('/pages/sessions')
+def session_page_route():
+    return render_template('sessions.html', title="Sessions", pages=pages)
+
+
+@app.route('/pages/sims')
+def sims_page_route():
+    return render_template('sims.html', title="Sims", pages=pages)
 
 
 if __name__ == '__main__':

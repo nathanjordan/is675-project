@@ -1,7 +1,7 @@
-function NodeController($scope, $resource) {
+function SimController($scope, $resource) {
 
-    var resourceUrl = '/node/'
-    var resourceListUrl = '/nodes'
+    var resourceUrl = '/sim/'
+    var resourceListUrl = '/sims'
 
     var Resource = $resource(resourceUrl + ':_id',
                          { _id: '@_id' },
@@ -25,10 +25,10 @@ function NodeController($scope, $resource) {
         var resource_id = String(Math.round(Math.random() * Math.pow(2, 64)))
         var resource = new Resource({
             _id: resource_id,
-            label: $scope.node.label,
-            ip_address: $scope.node.ip_address,
-            status: "online",
-            resources: [],
+            session: $scope.sim.session,
+            start_time: $scope.sim.start_time,
+            end_time: $scope.sim.end_time,
+            reports: [],
         });
         resource.$save();
         updateResourceList();

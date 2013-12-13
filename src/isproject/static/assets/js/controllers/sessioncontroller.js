@@ -1,7 +1,7 @@
-function NodeController($scope, $resource) {
+function SessionController($scope, $resource) {
 
-    var resourceUrl = '/node/'
-    var resourceListUrl = '/nodes'
+    var resourceUrl = '/session/'
+    var resourceListUrl = '/sessions'
 
     var Resource = $resource(resourceUrl + ':_id',
                          { _id: '@_id' },
@@ -25,10 +25,8 @@ function NodeController($scope, $resource) {
         var resource_id = String(Math.round(Math.random() * Math.pow(2, 64)))
         var resource = new Resource({
             _id: resource_id,
-            label: $scope.node.label,
-            ip_address: $scope.node.ip_address,
-            status: "online",
-            resources: [],
+            user: $scope.session.user,
+            created: $scope.session.created
         });
         resource.$save();
         updateResourceList();

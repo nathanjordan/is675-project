@@ -1,7 +1,7 @@
-function NodeController($scope, $resource) {
+function ReportController($scope, $resource) {
 
-    var resourceUrl = '/node/'
-    var resourceListUrl = '/nodes'
+    var resourceUrl = '/report/'
+    var resourceListUrl = '/reports'
 
     var Resource = $resource(resourceUrl + ':_id',
                          { _id: '@_id' },
@@ -25,10 +25,11 @@ function NodeController($scope, $resource) {
         var resource_id = String(Math.round(Math.random() * Math.pow(2, 64)))
         var resource = new Resource({
             _id: resource_id,
-            label: $scope.node.label,
-            ip_address: $scope.node.ip_address,
-            status: "online",
-            resources: [],
+            name: $scope.report.name,
+            sim_id: $scope.report.sim_id,
+            report_type: $scope.report.report_type,
+            report_string: $scope.report.report_string,
+            filename: $scope.report.filename
         });
         resource.$save();
         updateResourceList();
