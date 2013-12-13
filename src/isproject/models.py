@@ -1,5 +1,4 @@
 from mongokit import Document, OR
-from datetime import datetime
 from bson.objectid import ObjectId
 
 class Node(Document):
@@ -60,7 +59,7 @@ class Permission(Document):
 class Report(Document):
 
     __database__ = "ncs"
-    __collection__ = "report"
+    __collection__ = "reports"
 
     structure = {
         "name": unicode,
@@ -77,7 +76,7 @@ class Session(Document):
 
     structure = {
         "user": unicode,
-        "created": datetime
+        "created": unicode
     }
 
 class Sim(Document):
@@ -87,9 +86,9 @@ class Sim(Document):
 
     structure = {
         "session": unicode,
-        "start_time": datetime,
-        "end_time": datetime,
-        "reports": [ObjectId]
+        "start_time": unicode,
+        "end_time": unicode,
+        "reports": [unicode]
     }
 
 class User(Document):
@@ -102,5 +101,5 @@ class User(Document):
         "first_name": unicode,
         "last_name": unicode,
         "email": unicode,
-        "permissions": [ObjectId]
+        "permissions": [unicode]
     }

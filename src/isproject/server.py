@@ -43,7 +43,7 @@ class MongoResource(Resource):
     resource_name = None
 
     def get(self, _id):
-        doc = conn[self.resource_name].one({"_id": _id})
+        doc = conn[self.resource_name].one({"_id": unicode(_id)})
         if not doc:
             return make_response(("", 204, []))
         else:
@@ -125,12 +125,15 @@ class UsersResource(PluralResource):
 
     def get(self):
         resources = list(conn[self.resource_name].find())
+        res = ""
         for user in resources:
             permissions = []
             for permission in user['permissions']:
                 permissions.append(resolve_object(permission, "Permission"))
             user['permissions'] = permissions
-        return make_response(json.dumps(resources))
+            res = res + user.to_json() + ","
+        res = "[" + res[0:len(res) - 1] + "]"
+        return make_response(res)
 
 
 class PermissionsResource(PluralResource):

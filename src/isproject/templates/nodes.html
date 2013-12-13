@@ -23,7 +23,7 @@
                 </div>
             </form>
             <div class="entity-list">
-                <div class="entity" data-ng-repeat="user in resourceList">
+                <div class="entity" data-ng-repeat="node in resourceList">
                     <div class="form-group">
                         <label for="">Label</label>
                         <span>{{ '{{ node.label }}' }}</span>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Resources</label>
-                        <span data-ng-repeat="resource in node.resources">{{ '{{ resource.name }}' }},</span>
+                        <span class="label label-primary" data-ng-repeat="resource in node.resources">{{ '{{ resource.properties.series }}' }}</span>
                     </div>
                     <div class="form-group">
                         <label for=""></label>
